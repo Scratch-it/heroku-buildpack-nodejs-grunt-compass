@@ -101,7 +101,7 @@ if test -d $cache_dir/bower/app/bower_components; then
   cp -r $cache_dir/bower/app/bower_components $angular_dir/app/
 
   status "Pruning cached dependencies not specified in bower.json"
-  bower prune 2>&1 | indent
+  ./node_modules/bower/bin/bower prune 2>&1 | indent
 fi
 
 # Scope config var availability only to `npm install`
