@@ -12,7 +12,6 @@ env_dir=$3
 angular_dir="${build_dir}/angular"
 
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
-has_gem haml
 
 # Load some convenience functions like status(), echo(), and indent()
 source $bp_dir/bin/common.sh
