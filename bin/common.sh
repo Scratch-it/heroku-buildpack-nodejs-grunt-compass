@@ -26,7 +26,7 @@ indent() {
 }
 
 cat_npm_debug_log() {
-  test -f $build_dir/npm-debug.log && cat $build_dir/npm-debug.log
+  test -f $build_dir/angular/npm-debug.log && cat $build_dir/angular/npm-debug.log
 }
 
 export_env_dir() {
