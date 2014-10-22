@@ -119,7 +119,6 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  cat $angular_dir/.npmrc
   npm install --userconfig $angular_dir/.npmrc --production 2>&1 | indent
 )
 
