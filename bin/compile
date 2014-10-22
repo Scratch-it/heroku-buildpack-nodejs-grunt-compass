@@ -57,6 +57,7 @@ mkdir -p $angular_dir/vendor
 mv $angular_dir/node-v$node_version-linux-x64 $angular_dir/vendor/node
 chmod +x $angular_dir/vendor/node/bin/*
 PATH=$PATH:$angular_dir/vendor/npm/bin:$angular_dir/vendor/node/bin
+export PATH
 
 #upgrade npm
 if [ -n "$node_version" ] ; then
@@ -64,15 +65,18 @@ if [ -n "$node_version" ] ; then
  echo $bp_dir
  which npm
  npm install npm@"${npm_version}"
- which npm
 
   #npm_url="https://github.com/npm/npm/archive/v$npm_version.tar.gz"
   #curl $npm_url -s -o - | tar xzf - -C $angular_dir
   #mv $angular_dir/npm-$npm_version $angular_dir/vendor/npm
  mv node_modules/npm $angular_dir/vendor/npm
  chmod +x $angular_dir/vendor/npm/bin/*
+
+ which npm
+ which $angular_dir/vendor/npm/bin/npm
 fi
 npm -v
+$angular_dir/vendor/npm/bin/npm -v
 
 # Run subsequent node/npm commands from the build path
 cd $angular_dir
@@ -133,7 +137,8 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  npm install --userconfig $angular_dir/.npmrc --production 2>&1 | indent
+  #npm install --userconfig $angular_dir/.npmrc --production 2>&1 | indent
+  $angular_dir/vendor/npm/bin/npm install --userconfig $angular_dir/.npmrc --production 2>&1 | indent
 )
 
 # Persist goodies like node-version in the slug
