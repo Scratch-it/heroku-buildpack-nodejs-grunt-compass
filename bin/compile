@@ -56,6 +56,7 @@ curl $node_url -s -o - | tar xzf - -C $angular_dir
 mkdir -p $angular_dir/vendor
 mv $angular_dir/node-v$node_version-linux-x64 $angular_dir/vendor/node
 chmod +x $angular_dir/vendor/node/bin/*
+PATH=$PATH:$angular_dir/vendor/npm/bin:$angular_dir/vendor/node/bin
 
 #upgrade npm
 if [ -n "$node_version" ] ; then
@@ -66,8 +67,6 @@ if [ -n "$node_version" ] ; then
  mv $build_dir/node_modules/npm $angular_dir/vendor/npm
  chmod +x $angular_dir/vendor/npm/bin/*
 fi
-
-PATH=$PATH:$angular_dir/vendor/npm/bin:$angular_dir/vendor/node/bin
 npm -v
 
 # Run subsequent node/npm commands from the build path
