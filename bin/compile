@@ -24,6 +24,8 @@ semver_range=$(cat $angular_dir/package.json | $bp_dir/vendor/jq -r .engines.nod
 
 # Resolve node version using semver.io
 node_version=$(curl --silent --get --data-urlencode "range=${semver_range}" https://semver.io/node/resolve)
+npm_version=$(cat $angular_dir/package.json | $bp_dir/vendor/jq -r .engines.npm)
+status "Resolved npm version: $npm_version"
 
 # Recommend using semver ranges in a safe manner
 if [ "$semver_range" == "null" ]; then
@@ -41,6 +43,7 @@ if [ "$semver_range" == "" ]; then
 else
   status "Requested node range:  $semver_range"
   status "Resolved node version: $node_version"
+  status "Resolved npm version: $npm_version"
 fi
 
 # Download node from Heroku's S3 mirror of nodejs.org/dist
@@ -53,6 +56,9 @@ mkdir -p $angular_dir/vendor
 mv $angular_dir/node-v$node_version-linux-x64 $angular_dir/vendor/node
 chmod +x $angular_dir/vendor/node/bin/*
 PATH=$PATH:$angular_dir/vendor/node/bin
+
+#upgrade npm
+npm install npm@${npm_version}
 
 # Run subsequent node/npm commands from the build path
 cd $angular_dir
@@ -113,6 +119,7 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
+  cat $angular_dir/.npmrc
   npm install --userconfig $angular_dir/.npmrc --production 2>&1 | indent
 )
 
@@ -216,6 +223,6 @@ echo "export PATH=\"\$HOME/.gem/ruby/1.9.1/bin:\$PATH\"" > $build_dir/.profile.d
     fi
 
     status "Running grunt heroku:$NODE_ENV task"
-    $angular_dir/node_modules/.bin/grunt heroku:$NODE_ENV
+    $angular_dir/node_modules/.bin/grunt heroku:$NODE_ENV --verbose
   fi
 )
