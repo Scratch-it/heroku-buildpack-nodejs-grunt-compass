@@ -59,10 +59,11 @@ chmod +x $angular_dir/vendor/node/bin/*
 
 #upgrade npm
 if [ -n "$node_version" ] ; then
- #npm install npm@${npm_version}
- npm_url="https://github.com/npm/npm/archive/v$npm_version.tar.gz"
- curl $npm_url -s -o - | tar xzf - -C $angular_dir
- mv $angular_dir/npm-$npm_version $angular_dir/vendor/npm
+ npm install npm@${npm_version}
+ #npm_url="https://github.com/npm/npm/archive/v$npm_version.tar.gz"
+ #curl $npm_url -s -o - | tar xzf - -C $angular_dir
+ #mv $angular_dir/npm-$npm_version $angular_dir/vendor/npm
+ mv $build_dir/node_modules/npm $angular_dir/vendor/npm
  chmod +x $angular_dir/vendor/npm/bin/*
 fi
 
