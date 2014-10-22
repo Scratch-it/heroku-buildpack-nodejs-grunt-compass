@@ -51,14 +51,23 @@ status "Downloading and installing node"
 node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
 curl $node_url -s -o - | tar xzf - -C $angular_dir
 
+
 # Move node (and npm) into ./vendor and make them executable
 mkdir -p $angular_dir/vendor
 mv $angular_dir/node-v$node_version-linux-x64 $angular_dir/vendor/node
 chmod +x $angular_dir/vendor/node/bin/*
-PATH=$PATH:$angular_dir/vendor/node/bin
 
 #upgrade npm
-npm install npm@${npm_version}
+if [ -n "$node_version" ] ; then
+ #npm install npm@${npm_version}
+ npm_url="https://github.com/npm/npm/archive/v$npm_version.tar.gz"
+ curl $npm_url -s -o - | tar xzf - -C $angular_dir
+ mv $angular_dir/npm-$npm_version $angular_dir/vendor/npm
+ chmod +x $angular_dir/vendor/npm/bin/*
+fi
+
+PATH=$PATH:$angular_dir/vendor/npm/bin:$angular_dir/vendor/node/bin
+npm -v
 
 # Run subsequent node/npm commands from the build path
 cd $angular_dir
