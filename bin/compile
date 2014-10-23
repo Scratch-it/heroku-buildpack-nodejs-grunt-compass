@@ -190,6 +190,8 @@ if [ ! -e $build_dir/Procfile ]; then
 fi
 
 ## install gems
+gem -v
+gem sources
 # list of installs
 gems="compass haml"
 status "Installing Compass and Haml"
