@@ -212,13 +212,18 @@ do
     HOME=$build_dir gem update "${g}" --user-install --no-rdoc --no-ri
   else
     status "Gem ${g} missing, installing..."
-    HOME=$build_dir gem install "${g}" --user-install --no-rdoc --no-ri
+
+    #pin sass for compass
+    if test $g = 'compass'; then
+      HOME=$build_dir gem install compass sass:3.4.5 --user-install --no-rdoc --no-ri
+    else
+      HOME=$build_dir gem install "${g}" --user-install --no-rdoc --no-ri
+    fi
   fi
 done
 
-#pin sass
-gem install --user-install --no-rdoc --no-ri sass:3.4.5
-gem uninstall -a sass:3.4.6
+#pin sass for compass
+
 
 # cache ruby gems
 rm -rf $cache_dir/ruby
