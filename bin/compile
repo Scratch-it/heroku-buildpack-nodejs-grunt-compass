@@ -60,7 +60,7 @@ PATH=$PATH:$angular_dir/vendor/npm/bin:$angular_dir/vendor/node/bin
 export PATH
 
 #upgrade npm
-if [ -n "$node_version" ] ; then
+if [ -n "$npm_version" ] ; then
  which npm
  npm install -g npm@"${npm_version}"
 
