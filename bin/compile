@@ -235,6 +235,8 @@ ls $GEM_HOME/gems
 HOME=$build_dir gem list
 HOME=$build_dir ruby -v
 ruby -v
+haml -v
+compass -v
 
 # cache ruby gems
 rm -rf $cache_dir/ruby
