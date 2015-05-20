@@ -229,6 +229,7 @@ done
 #pin sass for compass
 ls $GEM_HOME
 ls $GEM_HOME/bin
+ls $GEM_HOME/gems
 HOME=$build_dir gem list
 
 # cache ruby gems
