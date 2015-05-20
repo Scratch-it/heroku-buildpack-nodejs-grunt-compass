@@ -9,6 +9,8 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
+ruby -v
+
 angular_dir="${build_dir}/angular"
 
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
@@ -231,6 +233,8 @@ ls $GEM_HOME
 ls $GEM_HOME/bin
 ls $GEM_HOME/gems
 HOME=$build_dir gem list
+HOME=$build_dir ruby -v
+ruby -v
 
 # cache ruby gems
 rm -rf $cache_dir/ruby
