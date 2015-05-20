@@ -254,6 +254,6 @@ echo "export PATH=\"\$HOME/.gem/ruby/1.9.1/bin:\$PATH\"" > $build_dir/.profile.d
     fi
 
     status "Running grunt heroku:$NODE_ENV task"
-    $angular_dir/node_modules/.bin/grunt heroku:$NODE_ENV --verbose
+    $angular_dir/node_modules/.bin/grunt heroku:$NODE_ENV --verbose 2>> $build_dir/angular/npm-debug.log
   fi
 )
