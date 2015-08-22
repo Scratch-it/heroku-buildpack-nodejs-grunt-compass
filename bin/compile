@@ -197,17 +197,17 @@ gem sources
 # list of installs
 gems="compass haml"
 status "Installing Compass and Haml"
-export GEM_HOME=$build_dir/.gem/ruby/2.2.0
+export GEM_HOME=$build_dir/.gem/ruby/2.2.3
 PATH="$GEM_HOME/bin:$PATH"
 
-# ls $cache_dir/ruby/.gem/ruby/2.2.0/gems
+# ls $cache_dir/ruby/.gem/ruby/2.2.3/gems
 if test -d $cache_dir/ruby/.gem; then
   status "Restoring ruby gems directory from cache"
   cp -r $cache_dir/ruby/.gem $build_dir
 fi
 
-mkdir -p $build_dir/.gem/ruby/2.2.0/gems
-mkdir -p $build_dir/.gem/ruby/2.2.0/bin
+mkdir -p $build_dir/.gem/ruby/2.2.3/gems
+mkdir -p $build_dir/.gem/ruby/2.2.3/bin
 
 for g in $gems
 do
