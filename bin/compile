@@ -9,14 +9,10 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
-echo $PWD
-
 ruby -v
 
 export PATH=$(echo $PATH | sed "s/2.2.0/2.2.3/g")
 echo $PATH
-
-rm -rf $cache_dir/ruby
 
 angular_dir="${build_dir}/angular"
 
@@ -228,11 +224,11 @@ do
 
     #pin sass for compass
     if test $g = 'compass'; then
-      HOME=$build_dir gem install sass -v 3.4.5 --user-install --no-rdoc --no-ri
-      HOME=$build_dir gem install compass --user-install --no-rdoc --no-ri
-      #HOME=$build_dir gem install compass sass:3.4.5 --user-install --no-rdoc --no-ri
+      HOME=$build_dir gem install sass -v 3.4.5  --no-rdoc --no-ri
+      HOME=$build_dir gem install compass  --no-rdoc --no-ri
+      #HOME=$build_dir gem install compass sass:3.4.5  --no-rdoc --no-ri
     else
-      HOME=$build_dir gem install "${g}" --user-install --no-rdoc --no-ri
+      HOME=$build_dir gem install "${g}"  --no-rdoc --no-ri
     fi
   fi
 done
