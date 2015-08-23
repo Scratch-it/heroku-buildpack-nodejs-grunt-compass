@@ -9,12 +9,10 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
-echo "Build directory: $1"
-echo "Cache dir: $2"
-echo "env_dir: $3"
-
-
 ruby -v
+
+export PATH=$(echo $PATH | sed "s/2.2.0/2.2.3/g")
+echo $PATH
 
 angular_dir="${build_dir}/angular"
 
